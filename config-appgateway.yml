@@ -1,0 +1,52 @@
+server:
+    port: 5000
+
+jwt:
+    secret: Key#SuperSecret$Aforo2SS#JavaMicroservices#987654321
+    
+# localhost:5000/security/health  -> http://localhost:5001/health
+spring:
+    application:
+        name: appgateway
+    cloud:
+        gateway:
+            routes:      
+            - id: appsecurity
+              uri: http://localhost:5001
+              predicates:
+              - Path=/security/**
+              filters:
+              - StripPrefix=1
+            - id: appaccount
+              uri: http://localhost:5002
+              predicates:
+              - Path=/account/**
+              filters:
+              - StripPrefix=1
+              - JwtAuthenticationFilter
+            - id: appdeposit
+              uri: http://localhost:5003
+              predicates:
+              - Path=/deposit/**
+              filters:
+              - StripPrefix=1
+              - JwtAuthenticationFilter
+            - id: appwithdrawal
+              uri: http://localhost:5004
+              predicates:
+              - Path=/withdrawal/**
+              filters:
+              - StripPrefix=1
+              - JwtAuthenticationFilter
+            - id: appmovements
+              uri: http://localhost:5005
+              predicates:
+              - Path=/movements/**
+              filters:
+              - StripPrefix=1
+              - JwtAuthenticationFilter
+              
+#Environment
+environment:
+    name:
+        app: local
