@@ -20,34 +20,34 @@ spring:
                         allowedHeaders: "*"
             routes:      
             - id: appsecurity
-              uri: http://localhost:5001
+              uri: http://ec2-3-141-26-236.us-east-2.compute.amazonaws.com:5001
               predicates:
               - Path=/security/**
               filters:
               - StripPrefix=1
             - id: appaccount
-              uri: http://localhost:5002
+              uri: http://ec2-3-141-26-236.us-east-2.compute.amazonaws.com:5002
               predicates:
               - Path=/account/**
               filters:
               - StripPrefix=1
               - JwtAuthenticationFilter
             - id: appdeposit
-              uri: http://localhost:5003
+              uri: http://ec2-3-141-26-236.us-east-2.compute.amazonaws.com:5003
               predicates:
               - Path=/deposit/**
               filters:
               - StripPrefix=1
               - JwtAuthenticationFilter
             - id: appwithdrawal
-              uri: http://localhost:5004
+              uri: http://ec2-3-141-26-236.us-east-2.compute.amazonaws.com:5004
               predicates:
               - Path=/withdrawal/**
               filters:
               - StripPrefix=1
               - JwtAuthenticationFilter
             - id: appmovements
-              uri: http://localhost:5005
+              uri: http://ec2-3-141-26-236.us-east-2.compute.amazonaws.com:5005
               predicates:
               - Path=/movements/**
               filters:
@@ -57,4 +57,4 @@ spring:
 #Environment
 environment:
     name:
-        app: master
+        app: prod
